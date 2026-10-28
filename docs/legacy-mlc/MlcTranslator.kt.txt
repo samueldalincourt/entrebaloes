@@ -1,0 +1,133 @@
+package br.com.leitorlocal.tradutor_webtoon
+
+import android.content.Context
+import android.os.SystemClock
+import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import org.json.JSONArray
+import org.json.JSONObject
+import java.util.UUID
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicLong
+
+class MlcTranslator(private val context: Context) {
+    val available get() = try {
+        Class.forName("br.com.leitorlocal.tradutor_webtoon.mlc.NativeMlcRuntime")
+        context.assets.open("mlc-native-config.json").close()
+        true
+    } catch (_: Exception) { false }
+    private val mutex = Mutex()
+    @Volatile private var runtime: MlcRuntime? = null
+    @Volatile private var activeId: String? = null
+    @Volatile private var runtimeFailure: String? = null
+    private data class Request(val result: CompletableDeferred<String>, val text: StringBuilder = StringBuilder())
+    private val requests = ConcurrentHashMap<String, Request>()
+    private val cancellationEpoch = AtomicLong(0)
+    var benchmark: Map<String, Any?> = emptyMap()
+        private set
+    suspend fun translate(system: String, input: String): String {
+        val epoch = cancellationEpoch.get()
+        return withContext(Dispatchers.IO) {
+        mutex.withLock {
+            if (epoch != cancellationEpoch.get()) throw CancellationException("Tela alterada")
+            ensureLoaded()
+            if (epoch != cancellationEpoch.get()) throw CancellationException("Tela alterada")
+            val id = UUID.randomUUID().toString()
+            val request = Request(CompletableDeferred())
+            requests[id] = request; activeId = id
+            try {
+                if (epoch != cancellationEpoch.get()) throw CancellationException("Tela alterada")
+                val messages = JSONArray()
+                    .put(JSONObject().put("role", "system").put("content", system))
+                    .put(JSONObject().put("role", "user").put("content", "$input /no_think"))
+                val json = JSONObject().put("messages", messages).put("stream", true)
+                    .put("stream_options", JSONObject().put("include_usage", true))
+                    .put("temperature", 0.1).put("top_p", 0.8).put("max_tokens", 640)
+                runtime!!.generate(json.toString(), id)
+                if (epoch != cancellationEpoch.get()) throw CancellationException("Tela alterada")
+                try { withTimeout(60000) { request.result.await() } }
+                catch (_: TimeoutCancellationException) {
+                    throw IllegalStateException("O modelo não respondeu em 60 segundos. Consulte o diagnóstico do aparelho.")
+                }
+            } finally {
+                runtime?.abort(id); requests.remove(id); activeId = null
+            }
+        }
+        }
+    }
+    private fun ensureLoaded() {
+        runtimeFailure?.let { throw IllegalStateException(it) }
+        if (runtime != null) return
+        check(available) { "Runtime MLC ausente. Execute scripts/prepare_mlc.py e recompile o APK." }
+        check(AppState.model.ready) { "Baixe e verifique o modelo antes de traduzir." }
+        val native = JSONObject(context.assets.open("mlc-native-config.json").bufferedReader().use { it.readText() })
+        val engine = Class.forName("br.com.leitorlocal.tradutor_webtoon.mlc.NativeMlcRuntime")
+            .getDeclaredConstructor().newInstance() as MlcRuntime
+        try {
+            engine.initialize { chunk -> onChunk(chunk) }
+            engine.reload(JSONObject().put("model", AppState.model.directory.absolutePath)
+                .put("model_lib", "system://${native.getString("model_lib")}")
+                .put("mode", "interactive").put("context_window_size", 2048)
+                .put("prefill_chunk_size", 128).put("max_num_sequence", 1)
+                .put("max_total_sequence_length", 2048).toString())
+            runtime = engine
+        } catch (error: Throwable) { runCatching { engine.close() }; throw error }
+    }
+    private fun onChunk(chunk: String) {
+        try {
+            if (chunk.trimStart().startsWith("{")) {
+                val message = JSONObject(chunk).optString("error", "Falha no runtime MLC")
+                runtimeFailure = message
+                requests.values.forEach { it.result.completeExceptionally(IllegalStateException(message)) }
+                return
+            }
+            val chunks = JSONArray(chunk)
+            for (i in 0 until chunks.length()) {
+                val item = chunks.getJSONObject(i)
+                val request = requests[item.optString("id")] ?: continue
+                if (item.has("error")) {
+                    request.result.completeExceptionally(IllegalStateException(item.get("error").toString()))
+                    continue
+                }
+                val choices = item.optJSONArray("choices") ?: JSONArray()
+                for (j in 0 until choices.length()) {
+                    val choice = choices.getJSONObject(j)
+                    val content = choice.optJSONObject("delta")?.optString("content", "") ?: ""
+                    request.text.append(content)
+                    val finish = if (choice.isNull("finish_reason")) "" else choice.optString("finish_reason")
+                    when (finish) {
+                        "length", "error" -> request.result.completeExceptionally(
+                            IllegalStateException("Geração interrompida: $finish"))
+                        "stop" -> request.result.complete(request.text.toString())
+                    }
+                }
+                if (item.has("usage") && !item.isNull("usage")) request.result.complete(request.text.toString())
+            }
+        } catch (error: Exception) {
+            requests.values.forEach { it.result.completeExceptionally(error) }
+        }
+    }
+    fun cancelActive() {
+        cancellationEpoch.incrementAndGet()
+        activeId?.let { id ->
+            runtime?.abort(id)
+            requests[id]?.result?.completeExceptionally(CancellationException("Tela alterada"))
+        }
+    }
+    suspend fun benchmark(): Map<String, Any?> {
+        val start = SystemClock.elapsedRealtime()
+        val text = translate("Translate to Brazilian Portuguese. Output only the translation. /no_think",
+            "I'm going to be the king of the pirates!")
+        val elapsed = SystemClock.elapsedRealtime() - start
+        benchmark = mapOf("elapsedMs" to elapsed, "translation" to text, "includesColdStart" to true)
+        return benchmark
+    }
+    suspend fun unload() = withContext(Dispatchers.IO) {
+        cancelActive()
+        mutex.withLock {
+            try { runtime?.close() }
+            finally { runtime = null; runtimeFailure = null }
+        }
+    }
+}

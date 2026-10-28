@@ -1,0 +1,2370 @@
+{
+  "date": "2026-10-28",
+  "device": "POCO M7 Pro 2409FPCC4G / MT6855 / PowerVR BXM-8-256",
+  "scope": "Real offline inference on device using the app C++ engine; synthetic dialogue. Excludes screen capture, OCR, overlay and 550ms scroll debounce. Model loading and priming are reported separately.",
+  "selectedModel": "tencent/Hy-MT2-1.8B-GGUF / Q4_K_M",
+  "selectedRevision": "a0c709d9fac510f2c807aa3af52872340dc37a4a",
+  "selectedSha256": "dc5f44fcf1fa496ee7ad725982c0c8c553a4de00259b53af84c4b89fb0c06699",
+  "summaries": {
+    "baseline": {
+      "n": 12,
+      "medianMs": 4791.0,
+      "minMs": 4065,
+      "maxMs": 7724,
+      "under3000ms": 0
+    },
+    "qwen_cached": {
+      "n": 12,
+      "medianMs": 3013.0,
+      "minMs": 1547,
+      "maxMs": 3587,
+      "under3000ms": 6
+    },
+    "qwen_plain": {
+      "n": 12,
+      "medianMs": 1643.5,
+      "minMs": 996,
+      "maxMs": 2794,
+      "under3000ms": 12
+    },
+    "qwen3_plain": {
+      "n": 12,
+      "medianMs": 1990.5,
+      "minMs": 1261,
+      "maxMs": 5604,
+      "under3000ms": 11
+    },
+    "selected": {
+      "n": 12,
+      "medianMs": 1601.5,
+      "minMs": 1247,
+      "maxMs": 2129,
+      "under3000ms": 12
+    },
+    "held_out": {
+      "n": 9,
+      "medianMs": 1832,
+      "minMs": 1237,
+      "maxMs": 2465,
+      "under3000ms": 9
+    }
+  },
+  "medianSpeedup": 2.991570402747424,
+  "qualityNotes": [
+    "Critical idioms improved: keep an eye -> Fique de olho; guard down -> nao baixe a guarda. Negation preserved in reviewed cases.",
+    "The unprotected ambiguous name Nest was translated as a noun with the colloquial prompt. Production protects glossary names by reversible markers; the protected-name case preserved the marker.",
+    "Small synthetic corpus, manual semantic review, not an automated benchmark of broad translation quality. Some phrases remain less natural or lose nuance; no parity with Gemini is claimed."
+  ],
+  "measurements": {
+    "baseline": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "elapsedMs": 2121
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "{\"b0\":\"I'm going to be the king of the pirates!\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4661,
+        "outputRaw": "{\"b0\":\"Vou ser o rei dos piratas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 0,
+          "generatedTokens": 15,
+          "prefillMs": 2138,
+          "generationMs": 2523,
+          "elapsedMs": 4661
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "{\"b0\":\"I never said I trusted him.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4533,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 0,
+          "generatedTokens": 15,
+          "prefillMs": 1983,
+          "generationMs": 2550,
+          "elapsedMs": 4533
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "{\"b0\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4065,
+        "outputRaw": "{\"b0\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 0,
+          "generatedTokens": 12,
+          "prefillMs": 2012,
+          "generationMs": 2052,
+          "elapsedMs": 4064
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "{\"b0\":\"You have some nerve showing your face here.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4849,
+        "outputRaw": "{\"b0\":\"Você tem muita coragem mostrando a cara aqui.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 0,
+          "generatedTokens": 17,
+          "prefillMs": 1980,
+          "generationMs": 2868,
+          "elapsedMs": 4848
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "{\"b0\":\"It's not like I wanted to save you or anything!\"}",
+        "loadMs": 2121,
+        "elapsedMs": 7724,
+        "outputRaw": "{\"b0\":\"Não é como se eu tivesse querido salvar você ou coisa parecida!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 0,
+          "generatedTokens": 23,
+          "prefillMs": 2205,
+          "generationMs": 5519,
+          "elapsedMs": 7724
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "{\"b0\":\"Luffy, don't let your guard down.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 5425,
+        "outputRaw": "{\"b0\":\"Luffy, não deixe que seu guarda-chu cai.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 0,
+          "generatedTokens": 19,
+          "prefillMs": 2087,
+          "generationMs": 3337,
+          "elapsedMs": 5424
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 0,
+        "case": 6,
+        "label": "two-balloons",
+        "source": "I never said I trusted him.\nKeep an eye on the entrance.",
+        "input": "{\"b0\":\"I never said I trusted him.\",\"b1\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 6692,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\",\"b1\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 72,
+          "cachedTokens": 0,
+          "generatedTokens": 25,
+          "prefillMs": 2256,
+          "generationMs": 4435,
+          "elapsedMs": 6691
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "{\"b0\":\"I'm going to be the king of the pirates!\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4733,
+        "outputRaw": "{\"b0\":\"Vou ser o rei dos piratas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 0,
+          "generatedTokens": 15,
+          "prefillMs": 2119,
+          "generationMs": 2613,
+          "elapsedMs": 4732
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "{\"b0\":\"I never said I trusted him.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4592,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 0,
+          "generatedTokens": 15,
+          "prefillMs": 1994,
+          "generationMs": 2598,
+          "elapsedMs": 4592
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "{\"b0\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 4093,
+        "outputRaw": "{\"b0\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 0,
+          "generatedTokens": 12,
+          "prefillMs": 1988,
+          "generationMs": 2105,
+          "elapsedMs": 4093
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "{\"b0\":\"You have some nerve showing your face here.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 5060,
+        "outputRaw": "{\"b0\":\"Você tem muita coragem mostrando a cara aqui.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 0,
+          "generatedTokens": 17,
+          "prefillMs": 2039,
+          "generationMs": 3020,
+          "elapsedMs": 5059
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "{\"b0\":\"It's not like I wanted to save you or anything!\"}",
+        "loadMs": 2121,
+        "elapsedMs": 6268,
+        "outputRaw": "{\"b0\":\"Não é como se eu tivesse querido salvar você ou coisa parecida!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 0,
+          "generatedTokens": 23,
+          "prefillMs": 2194,
+          "generationMs": 4074,
+          "elapsedMs": 6268
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "{\"b0\":\"Luffy, don't let your guard down.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 5473,
+        "outputRaw": "{\"b0\":\"Luffy, não deixe que seu guarda-chu cai.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 0,
+          "generatedTokens": 19,
+          "prefillMs": 2062,
+          "generationMs": 3410,
+          "elapsedMs": 5472
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 3,
+          "batchThreads": 3,
+          "cache": false,
+          "earlyStop": false
+        },
+        "round": 1,
+        "case": 6,
+        "label": "two-balloons",
+        "source": "I never said I trusted him.\nKeep an eye on the entrance.",
+        "input": "{\"b0\":\"I never said I trusted him.\",\"b1\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2121,
+        "elapsedMs": 6677,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\",\"b1\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 72,
+          "cachedTokens": 0,
+          "generatedTokens": 25,
+          "prefillMs": 2271,
+          "generationMs": 4405,
+          "elapsedMs": 6676
+        }
+      }
+    ],
+    "qwen_cached": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "elapsedMs": 2326
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "{\"b0\":\"I'm going to be the king of the pirates!\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3587,
+        "outputRaw": "{\"b0\":\"Vou ser o rei dos piratas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 0,
+          "generatedTokens": 15,
+          "prefillMs": 1486,
+          "generationMs": 2100,
+          "elapsedMs": 3586
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "{\"b0\":\"I never said I trusted him.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 2383,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 50,
+          "generatedTokens": 15,
+          "prefillMs": 279,
+          "generationMs": 2104,
+          "elapsedMs": 2383
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "{\"b0\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 1547,
+        "outputRaw": "{\"b0\":\"Monitor the entrance.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 49,
+          "generatedTokens": 9,
+          "prefillMs": 326,
+          "generationMs": 1220,
+          "elapsedMs": 1546
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "{\"b0\":\"You have some nerve showing your face here.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 2831,
+        "outputRaw": "{\"b0\":\"Você tem muita coragem mostrando a cara aqui.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 49,
+          "generatedTokens": 17,
+          "prefillMs": 411,
+          "generationMs": 2420,
+          "elapsedMs": 2831
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "{\"b0\":\"It's not like I wanted to save you or anything!\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3327,
+        "outputRaw": "{\"b0\":\"Não é como se eu quisesse salvar você ou coisa dessas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 49,
+          "generatedTokens": 20,
+          "prefillMs": 446,
+          "generationMs": 2880,
+          "elapsedMs": 3326
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "{\"b0\":\"Luffy, don't let your guard down.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3163,
+        "outputRaw": "{\"b0\":\"Luffy, não deixe que seu guarda-chu cai.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 49,
+          "generatedTokens": 19,
+          "prefillMs": 363,
+          "generationMs": 2799,
+          "elapsedMs": 3162
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 0,
+        "case": 6,
+        "label": "two-balloons",
+        "source": "I never said I trusted him.\nKeep an eye on the entrance.",
+        "input": "{\"b0\":\"I never said I trusted him.\",\"b1\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 4225,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\",\"b1\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 72,
+          "cachedTokens": 49,
+          "generatedTokens": 25,
+          "prefillMs": 576,
+          "generationMs": 3648,
+          "elapsedMs": 4224
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "{\"b0\":\"I'm going to be the king of the pirates!\"}",
+        "loadMs": 2326,
+        "elapsedMs": 2504,
+        "outputRaw": "{\"b0\":\"Vou ser o rei dos piratas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 50,
+          "generatedTokens": 15,
+          "prefillMs": 361,
+          "generationMs": 2143,
+          "elapsedMs": 2504
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "{\"b0\":\"I never said I trusted him.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 2917,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 50,
+          "generatedTokens": 15,
+          "prefillMs": 288,
+          "generationMs": 2628,
+          "elapsedMs": 2916
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "{\"b0\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 1552,
+        "outputRaw": "{\"b0\":\"Monitor the entrance.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 49,
+          "generatedTokens": 9,
+          "prefillMs": 326,
+          "generationMs": 1226,
+          "elapsedMs": 1552
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "{\"b0\":\"You have some nerve showing your face here.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3109,
+        "outputRaw": "{\"b0\":\"Você tem muita coragem mostrando a cara aqui.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 49,
+          "generatedTokens": 17,
+          "prefillMs": 423,
+          "generationMs": 2685,
+          "elapsedMs": 3108
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "{\"b0\":\"It's not like I wanted to save you or anything!\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3379,
+        "outputRaw": "{\"b0\":\"Não é como se eu quisesse salvar você ou coisa dessas!\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 49,
+          "generatedTokens": 20,
+          "prefillMs": 450,
+          "generationMs": 2929,
+          "elapsedMs": 3379
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "{\"b0\":\"Luffy, don't let your guard down.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 3126,
+        "outputRaw": "{\"b0\":\"Luffy, não deixe que seu guarda-chu cai.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 49,
+          "generatedTokens": 19,
+          "prefillMs": 366,
+          "generationMs": 2759,
+          "elapsedMs": 3125
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "round": 1,
+        "case": 6,
+        "label": "two-balloons",
+        "source": "I never said I trusted him.\nKeep an eye on the entrance.",
+        "input": "{\"b0\":\"I never said I trusted him.\",\"b1\":\"Keep an eye on the entrance.\"}",
+        "loadMs": 2326,
+        "elapsedMs": 4265,
+        "outputRaw": "{\"b0\":\"Eu nunca disse que confiava nele.\",\"b1\":\"Aguarda o portão.\"}",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 72,
+          "cachedTokens": 49,
+          "generatedTokens": 25,
+          "prefillMs": 581,
+          "generationMs": 3684,
+          "elapsedMs": 4265
+        }
+      },
+      {
+        "type": "cancel",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "elapsedMs": 107,
+        "cancelled": true,
+        "error": "CANCELED"
+      },
+      {
+        "type": "cancel-recovery",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true
+        },
+        "elapsedMs": 3076,
+        "recovered": true,
+        "outputRaw": "{\"b0\":\"Aguarda o portão.\"}",
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 0,
+          "generatedTokens": 12,
+          "prefillMs": 1376,
+          "generationMs": 1700,
+          "elapsedMs": 3076
+        },
+        "error": ""
+      }
+    ],
+    "qwen_plain": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 3522
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 3522,
+        "elapsedMs": 2794,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 0,
+          "generatedTokens": 10,
+          "prefillMs": 1553,
+          "generationMs": 1241,
+          "elapsedMs": 2794
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 3522,
+        "elapsedMs": 1417,
+        "outputRaw": "Eu nunca disse que confiava nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 60,
+          "cachedTokens": 49,
+          "generatedTokens": 10,
+          "prefillMs": 404,
+          "generationMs": 1013,
+          "elapsedMs": 1417
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 3522,
+        "elapsedMs": 998,
+        "outputRaw": "Vigie o portão.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 60,
+          "cachedTokens": 48,
+          "generatedTokens": 7,
+          "prefillMs": 300,
+          "generationMs": 697,
+          "elapsedMs": 997
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 3522,
+        "elapsedMs": 1637,
+        "outputRaw": "Você tem muita vergonha de aparecer aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 48,
+          "generatedTokens": 12,
+          "prefillMs": 431,
+          "generationMs": 1206,
+          "elapsedMs": 1637
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 3522,
+        "elapsedMs": 1860,
+        "outputRaw": "Não é como eu queria te salvar ou coisa parecida!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 48,
+          "generatedTokens": 14,
+          "prefillMs": 455,
+          "generationMs": 1404,
+          "elapsedMs": 1859
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 3522,
+        "elapsedMs": 2013,
+        "outputRaw": "Luffy, não deixe que seu guarda-chuva cai.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 63,
+          "cachedTokens": 48,
+          "generatedTokens": 15,
+          "prefillMs": 501,
+          "generationMs": 1511,
+          "elapsedMs": 2012
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 3522,
+        "elapsedMs": 1389,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 48,
+          "generatedTokens": 10,
+          "prefillMs": 390,
+          "generationMs": 998,
+          "elapsedMs": 1388
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 3522,
+        "elapsedMs": 1431,
+        "outputRaw": "Eu nunca disse que confiava nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 60,
+          "cachedTokens": 49,
+          "generatedTokens": 10,
+          "prefillMs": 401,
+          "generationMs": 1030,
+          "elapsedMs": 1431
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 3522,
+        "elapsedMs": 996,
+        "outputRaw": "Vigie o portão.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 60,
+          "cachedTokens": 48,
+          "generatedTokens": 7,
+          "prefillMs": 300,
+          "generationMs": 696,
+          "elapsedMs": 996
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 3522,
+        "elapsedMs": 1650,
+        "outputRaw": "Você tem muita vergonha de aparecer aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 62,
+          "cachedTokens": 48,
+          "generatedTokens": 12,
+          "prefillMs": 432,
+          "generationMs": 1218,
+          "elapsedMs": 1650
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 3522,
+        "elapsedMs": 2131,
+        "outputRaw": "Não é como eu queria te salvar ou coisa parecida!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 65,
+          "cachedTokens": 48,
+          "generatedTokens": 14,
+          "prefillMs": 536,
+          "generationMs": 1594,
+          "elapsedMs": 2130
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 3522,
+        "elapsedMs": 2525,
+        "outputRaw": "Luffy, não deixe que seu guarda-chuva cai.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 63,
+          "cachedTokens": 48,
+          "generatedTokens": 15,
+          "prefillMs": 641,
+          "generationMs": 1883,
+          "elapsedMs": 2524
+        }
+      },
+      {
+        "type": "cancel",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 103,
+        "cancelled": true,
+        "error": "CANCELED"
+      },
+      {
+        "type": "cancel-recovery",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 2467,
+        "recovered": true,
+        "outputRaw": "Vigie o portão.",
+        "stats": {
+          "promptTokens": 60,
+          "cachedTokens": 0,
+          "generatedTokens": 7,
+          "prefillMs": 1609,
+          "generationMs": 858,
+          "elapsedMs": 2467
+        },
+        "error": ""
+      }
+    ],
+    "qwen3_plain": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "elapsedMs": 4783
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 4783,
+        "elapsedMs": 5604,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 68,
+          "cachedTokens": 0,
+          "generatedTokens": 10,
+          "prefillMs": 3439,
+          "generationMs": 2164,
+          "elapsedMs": 5603
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 4783,
+        "elapsedMs": 2133,
+        "outputRaw": "Eu nunca disse que confio nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 49,
+          "generatedTokens": 9,
+          "prefillMs": 864,
+          "generationMs": 1269,
+          "elapsedMs": 2133
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 4783,
+        "elapsedMs": 1317,
+        "outputRaw": "Aguarde no portão.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 48,
+          "generatedTokens": 7,
+          "prefillMs": 487,
+          "generationMs": 830,
+          "elapsedMs": 1317
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 4783,
+        "elapsedMs": 2117,
+        "outputRaw": "Você tem alguns nervos mostrando seu rosto aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 48,
+          "generatedTokens": 12,
+          "prefillMs": 616,
+          "generationMs": 1501,
+          "elapsedMs": 2117
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 4783,
+        "elapsedMs": 2535,
+        "outputRaw": "Não é como se eu tivesse querido salvar você ou algo assim.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 69,
+          "cachedTokens": 48,
+          "generatedTokens": 16,
+          "prefillMs": 639,
+          "generationMs": 1896,
+          "elapsedMs": 2535
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 4783,
+        "elapsedMs": 1985,
+        "outputRaw": "Luffy, não deixe sua guarda baixa.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 48,
+          "generatedTokens": 11,
+          "prefillMs": 680,
+          "generationMs": 1305,
+          "elapsedMs": 1985
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 4783,
+        "elapsedMs": 1758,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 68,
+          "cachedTokens": 48,
+          "generatedTokens": 10,
+          "prefillMs": 593,
+          "generationMs": 1165,
+          "elapsedMs": 1758
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 4783,
+        "elapsedMs": 1632,
+        "outputRaw": "Eu nunca disse que confio nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 49,
+          "generatedTokens": 9,
+          "prefillMs": 591,
+          "generationMs": 1041,
+          "elapsedMs": 1632
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 4783,
+        "elapsedMs": 1261,
+        "outputRaw": "Aguarde no portão.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 48,
+          "generatedTokens": 7,
+          "prefillMs": 447,
+          "generationMs": 814,
+          "elapsedMs": 1261
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 4783,
+        "elapsedMs": 1996,
+        "outputRaw": "Você tem alguns nervos mostrando seu rosto aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 66,
+          "cachedTokens": 48,
+          "generatedTokens": 12,
+          "prefillMs": 595,
+          "generationMs": 1401,
+          "elapsedMs": 1996
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 4783,
+        "elapsedMs": 2504,
+        "outputRaw": "Não é como se eu tivesse querido salvar você ou algo assim.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 69,
+          "cachedTokens": 48,
+          "generatedTokens": 16,
+          "prefillMs": 643,
+          "generationMs": 1860,
+          "elapsedMs": 2503
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 4783,
+        "elapsedMs": 1950,
+        "outputRaw": "Luffy, não deixe sua guarda baixa.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 67,
+          "cachedTokens": 48,
+          "generatedTokens": 11,
+          "prefillMs": 682,
+          "generationMs": 1268,
+          "elapsedMs": 1950
+        }
+      },
+      {
+        "type": "cancel",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "elapsedMs": 108,
+        "cancelled": true,
+        "error": "CANCELED"
+      },
+      {
+        "type": "cancel-recovery",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "promptFile": ""
+        },
+        "elapsedMs": 2493,
+        "recovered": true,
+        "outputRaw": "Aguarde no portão.",
+        "stats": {
+          "promptTokens": 64,
+          "cachedTokens": 0,
+          "generatedTokens": 7,
+          "prefillMs": 1675,
+          "generationMs": 817,
+          "elapsedMs": 2492
+        },
+        "error": ""
+      }
+    ],
+    "selected": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 2355
+      },
+      {
+        "type": "prime",
+        "elapsedMs": 1281
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 2355,
+        "elapsedMs": 1496,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 53,
+          "cachedTokens": 41,
+          "generatedTokens": 10,
+          "prefillMs": 365,
+          "generationMs": 1130,
+          "elapsedMs": 1495
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 2355,
+        "elapsedMs": 1388,
+        "outputRaw": "Nunca disse que confio nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 42,
+          "generatedTokens": 9,
+          "prefillMs": 377,
+          "generationMs": 1010,
+          "elapsedMs": 1387
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 2355,
+        "elapsedMs": 1248,
+        "outputRaw": "Fique de olho na entrada.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 41,
+          "generatedTokens": 9,
+          "prefillMs": 236,
+          "generationMs": 1012,
+          "elapsedMs": 1248
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 2355,
+        "elapsedMs": 1975,
+        "outputRaw": "Você tem muita coragem de mostrar a cara aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 51,
+          "cachedTokens": 41,
+          "generatedTokens": 14,
+          "prefillMs": 393,
+          "generationMs": 1582,
+          "elapsedMs": 1975
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 2355,
+        "elapsedMs": 2129,
+        "outputRaw": "Não é que eu quisesse salvar você ou algo do tipo!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 54,
+          "cachedTokens": 41,
+          "generatedTokens": 15,
+          "prefillMs": 426,
+          "generationMs": 1702,
+          "elapsedMs": 2128
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 2355,
+        "elapsedMs": 1707,
+        "outputRaw": "Luffy, não baixe a guarda.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 52,
+          "cachedTokens": 41,
+          "generatedTokens": 11,
+          "prefillMs": 472,
+          "generationMs": 1234,
+          "elapsedMs": 1706
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 0,
+        "label": "single-0",
+        "source": "I'm going to be the king of the pirates!",
+        "input": "I'm going to be the king of the pirates!",
+        "loadMs": 2355,
+        "elapsedMs": 1481,
+        "outputRaw": "Vou ser o rei dos piratas!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 53,
+          "cachedTokens": 41,
+          "generatedTokens": 10,
+          "prefillMs": 356,
+          "generationMs": 1124,
+          "elapsedMs": 1480
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 1,
+        "label": "single-1",
+        "source": "I never said I trusted him.",
+        "input": "I never said I trusted him.",
+        "loadMs": 2355,
+        "elapsedMs": 1394,
+        "outputRaw": "Nunca disse que confio nele.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 42,
+          "generatedTokens": 9,
+          "prefillMs": 380,
+          "generationMs": 1014,
+          "elapsedMs": 1394
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 2,
+        "label": "single-2",
+        "source": "Keep an eye on the entrance.",
+        "input": "Keep an eye on the entrance.",
+        "loadMs": 2355,
+        "elapsedMs": 1247,
+        "outputRaw": "Fique de olho na entrada.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 41,
+          "generatedTokens": 9,
+          "prefillMs": 238,
+          "generationMs": 1009,
+          "elapsedMs": 1247
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 3,
+        "label": "single-3",
+        "source": "You have some nerve showing your face here.",
+        "input": "You have some nerve showing your face here.",
+        "loadMs": 2355,
+        "elapsedMs": 1968,
+        "outputRaw": "Você tem muita coragem de mostrar a cara aqui.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 51,
+          "cachedTokens": 41,
+          "generatedTokens": 14,
+          "prefillMs": 394,
+          "generationMs": 1573,
+          "elapsedMs": 1967
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 4,
+        "label": "single-4",
+        "source": "It's not like I wanted to save you or anything!",
+        "input": "It's not like I wanted to save you or anything!",
+        "loadMs": 2355,
+        "elapsedMs": 2115,
+        "outputRaw": "Não é que eu quisesse salvar você ou algo do tipo!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 54,
+          "cachedTokens": 41,
+          "generatedTokens": 15,
+          "prefillMs": 428,
+          "generationMs": 1686,
+          "elapsedMs": 2114
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 1,
+        "case": 5,
+        "label": "single-5",
+        "source": "Luffy, don't let your guard down.",
+        "input": "Luffy, don't let your guard down.",
+        "loadMs": 2355,
+        "elapsedMs": 1709,
+        "outputRaw": "Luffy, não baixe a guarda.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 52,
+          "cachedTokens": 41,
+          "generatedTokens": 11,
+          "prefillMs": 474,
+          "generationMs": 1235,
+          "elapsedMs": 1709
+        }
+      },
+      {
+        "type": "cancel",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 114,
+        "cancelled": true,
+        "error": "CANCELED"
+      },
+      {
+        "type": "cancel-recovery",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": false,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 2414,
+        "recovered": true,
+        "outputRaw": "Fique de olho na entrada.",
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 0,
+          "generatedTokens": 9,
+          "prefillMs": 1405,
+          "generationMs": 1009,
+          "elapsedMs": 2414
+        },
+        "error": ""
+      }
+    ],
+    "held_out": [
+      {
+        "type": "load",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "elapsedMs": 4229
+      },
+      {
+        "type": "prime",
+        "elapsedMs": 1976
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 0,
+        "label": "held-out-negation-scope",
+        "source": "I didn't say we should give up.",
+        "input": "I didn't say we should give up.",
+        "loadMs": 4229,
+        "elapsedMs": 1832,
+        "outputRaw": "Não disse que tínhamos que desistir.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 51,
+          "cachedTokens": 41,
+          "generatedTokens": 12,
+          "prefillMs": 431,
+          "generationMs": 1401,
+          "elapsedMs": 1832
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 1,
+        "label": "held-out-idiom-luck",
+        "source": "Don't push your luck.",
+        "input": "Don't push your luck.",
+        "loadMs": 4229,
+        "elapsedMs": 1383,
+        "outputRaw": "Não tente arriscar demais.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 48,
+          "cachedTokens": 41,
+          "generatedTokens": 9,
+          "prefillMs": 377,
+          "generationMs": 1006,
+          "elapsedMs": 1383
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 2,
+        "label": "held-out-idiom-secret",
+        "source": "She spilled the beans about our plan.",
+        "input": "She spilled the beans about our plan.",
+        "loadMs": 4229,
+        "elapsedMs": 1662,
+        "outputRaw": "Ela contou tudo sobre o nosso plano.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 50,
+          "cachedTokens": 41,
+          "generatedTokens": 12,
+          "prefillMs": 318,
+          "generationMs": 1344,
+          "elapsedMs": 1662
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 3,
+        "label": "held-out-proper-name",
+        "source": "Nest is the only home I've ever known.",
+        "input": "Nest is the only home I've ever known.",
+        "loadMs": 4229,
+        "elapsedMs": 1917,
+        "outputRaw": "O ninho é o único lar que já conheci.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 53,
+          "cachedTokens": 41,
+          "generatedTokens": 14,
+          "prefillMs": 351,
+          "generationMs": 1566,
+          "elapsedMs": 1917
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 4,
+        "label": "held-out-uppercase-fragment",
+        "source": "AMONG THOSE WHO STILL BELIEVE...",
+        "input": "AMONG THOSE WHO STILL BELIEVE...",
+        "loadMs": 4229,
+        "elapsedMs": 1627,
+        "outputRaw": "Entre aqueles que ainda acreditam...",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 55,
+          "cachedTokens": 41,
+          "generatedTokens": 10,
+          "prefillMs": 512,
+          "generationMs": 1115,
+          "elapsedMs": 1627
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 5,
+        "label": "held-out-sarcasm",
+        "source": "Oh, great. Another genius with a plan.",
+        "input": "Oh, great. Another genius with a plan.",
+        "loadMs": 4229,
+        "elapsedMs": 2258,
+        "outputRaw": "Oh, ótimo. Mais um gênio com um plano.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 52,
+          "cachedTokens": 41,
+          "generatedTokens": 16,
+          "prefillMs": 475,
+          "generationMs": 1783,
+          "elapsedMs": 2258
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 6,
+        "label": "held-out-negation-and-listening",
+        "source": "You don't have to forgive me. Just hear me out.",
+        "input": "You don't have to forgive me. Just hear me out.",
+        "loadMs": 4229,
+        "elapsedMs": 2184,
+        "outputRaw": "Não precisa me perdoar. Apenas me escute.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 55,
+          "cachedTokens": 41,
+          "generatedTokens": 15,
+          "prefillMs": 512,
+          "generationMs": 1672,
+          "elapsedMs": 2184
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 7,
+        "label": "held-out-idiom-help",
+        "source": "I could use a hand here!",
+        "input": "I could use a hand here!",
+        "loadMs": 4229,
+        "elapsedMs": 1237,
+        "outputRaw": "Posso precisar de ajuda aqui!",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 49,
+          "cachedTokens": 41,
+          "generatedTokens": 9,
+          "prefillMs": 236,
+          "generationMs": 1001,
+          "elapsedMs": 1237
+        }
+      },
+      {
+        "type": "case",
+        "profile": {
+          "threads": 2,
+          "batchThreads": 2,
+          "cache": true,
+          "earlyStop": true,
+          "plain": true,
+          "heldOut": true,
+          "pin": true,
+          "prime": true,
+          "promptFile": ""
+        },
+        "round": 0,
+        "case": 8,
+        "label": "held-out-protected-name",
+        "source": "__WT_NAME_0__ is the only home I've ever known.",
+        "input": "__WT_NAME_0__ is the only home I've ever known.",
+        "loadMs": 4229,
+        "elapsedMs": 2465,
+        "outputRaw": "__WT_NAME_0__ é o único lar que eu já conheci.",
+        "structurallyValid": true,
+        "stats": {
+          "promptTokens": 57,
+          "cachedTokens": 41,
+          "generatedTokens": 18,
+          "prefillMs": 457,
+          "generationMs": 2007,
+          "elapsedMs": 2464
+        }
+      }
+    ]
+  }
+}

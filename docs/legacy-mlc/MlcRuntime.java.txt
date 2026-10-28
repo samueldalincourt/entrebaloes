@@ -1,0 +1,12 @@
+package br.com.leitorlocal.tradutor_webtoon;
+
+import java.util.function.Consumer;
+
+/** Implemented by the actual TVM JNI adapter when native artifacts are packaged. */
+public interface MlcRuntime {
+    void initialize(Consumer<String> callback);
+    void reload(String config);
+    void generate(String request, String requestId);
+    void abort(String requestId);
+    void close();
+}

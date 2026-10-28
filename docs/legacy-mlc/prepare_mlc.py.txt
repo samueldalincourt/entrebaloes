@@ -1,0 +1,134 @@
+"""Build the pinned Qwen3 model and real MLC/TVM JNI artifacts for Android arm64.
+
+Run with the isolated MLC Python environment; no inference service is substituted.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import urllib.request
+
+ROOT = Path(__file__).resolve().parents[1]
+MLC_COMMIT = "8978ea9aec626d64096aaa92fbc89bda2e3ea802"
+
+
+def verify(file: Path, spec: dict) -> bool:
+    if not file.exists() or file.stat().st_size != spec["size"]:
+        return False
+    git = spec["algorithm"] == "git-sha1"
+    digest = hashlib.sha1() if git else hashlib.sha256()
+    if git:
+        digest.update(f"blob {spec['size']}\0".encode())
+    with file.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(262144), b""):
+            digest.update(chunk)
+    return digest.hexdigest() == spec["hash"]
+
+
+def run(*args: str | Path, cwd: Path = ROOT, env: dict | None = None) -> None:
+    subprocess.run([str(arg) for arg in args], cwd=cwd, env=env, check=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, default=ROOT / ".tools/mlc-llm")
+    parser.add_argument("--check", action="store_true", help="Report prerequisites without building")
+    args = parser.parse_args()
+    source = args.source.resolve()
+    env = os.environ.copy()
+    missing = []
+    for tool in ("git", "cmake", "ninja", "rustup", "cargo"):
+        location = shutil.which(tool)
+        print(f"{tool}: {location or 'MISSING'}", flush=True)
+        if location is None:
+            missing.append(tool)
+    ndk = Path(env.get("ANDROID_NDK", "__missing__"))
+    java = Path(env.get("JAVA_HOME", "__missing__"))
+    if not (ndk / "build/cmake/android.toolchain.cmake").is_file():
+        missing.append("ANDROID_NDK")
+    if not (java / "bin" / ("javac.exe" if os.name == "nt" else "javac")).is_file():
+        missing.append("JAVA_HOME (JDK)")
+    if not (source / "android/mlc4j/prepare_libs.py").is_file():
+        missing.append(f"MLC source at {source}")
+    if missing:
+        raise SystemExit("Missing prerequisites: " + ", ".join(missing))
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=source, text=True).strip()
+    if revision != MLC_COMMIT:
+        raise SystemExit(f"Expected MLC {MLC_COMMIT}, got {revision}; use the documented pinned checkout.")
+    dll_dir = ROOT / ".tools/native-deps/Library/bin"
+    if os.name == "nt" and dll_dir.is_dir():
+        env["WEBTOON_MLC_DLL_DIR"] = str(dll_dir)
+        env["PATH"] = str(dll_dir) + os.pathsep + env["PATH"]
+        env["PYTHONPATH"] = str(ROOT / "scripts/mlc_bootstrap") + os.pathsep + env.get("PYTHONPATH", "")
+        # Retain the DLL-directory handle throughout this process and propagate to Python children.
+        dll_handle = os.add_dll_directory(str(dll_dir))
+    try:
+        import mlc_llm  # noqa: F401
+    except Exception as error:
+        raise SystemExit(f"MLC compiler could not load: {type(error).__name__}: {error}. "
+            "See docs/BUILD.md for Windows native dependencies.") from error
+    if args.check:
+        print("MLC toolchain prerequisites available. Hardware compatibility is not yet tested.")
+        return
+    manifest = json.loads((ROOT / "android/app/src/main/assets/model-manifest.json").read_text(encoding="utf-8-sig"))
+    config_dir = ROOT / ".tools/model-config" / manifest["revision"]
+    config_dir.mkdir(parents=True, exist_ok=True)
+    # Compilation needs config/tokenizer metadata, not 984 MB of inference weights.
+    for spec in manifest["files"]:
+        if spec["path"].endswith(".bin"):
+            continue
+        destination = config_dir / spec["path"]
+        if verify(destination, spec):
+            continue
+        url = f"https://huggingface.co/{manifest['repository']}/resolve/{manifest['revision']}/{spec['path']}"
+        print(f"Downloading pinned configuration: {spec['path']}", flush=True)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(url, destination)
+        if not verify(destination, spec):
+            raise SystemExit(f"Checksum mismatch: {destination}")
+    output = ROOT / ".tools/mlc-package"
+    output.mkdir(parents=True, exist_ok=True)
+    package = {
+        "device": "android",
+        "model_list": [{"model": str(config_dir), "model_id": manifest["modelId"],
+            "estimated_vram_bytes": 3000000000, "bundle_weight": False,
+            "overrides": {"context_window_size": 2048, "prefill_chunk_size": 128}}],
+    }
+    package_file = ROOT / ".tools/mlc-package-config.json"
+    package_file.write_text(json.dumps(package, indent=2), encoding="utf-8")
+    env["MLC_LLM_SOURCE_DIR"] = str(source)
+    env["TVM_SOURCE_DIR"] = str(source / "3rdparty/tvm")
+    env["MLC_LLM_HOME"] = str(ROOT / ".tools/mlc-cache")
+    env["HF_HOME"] = str(ROOT / ".tools/huggingface")
+    env["CMAKE_GENERATOR"] = "Ninja"
+    env.setdefault("TVM_NDK_CC", str(ndk / "toolchains/llvm/prebuilt" /
+        ("windows-x86_64/bin/aarch64-linux-android26-clang.cmd" if os.name == "nt"
+         else "linux-x86_64/bin/aarch64-linux-android26-clang")))
+    # MLC's packaging command builds in cwd/build, so isolate it from Flutter build/.
+    work = ROOT / ".tools/mlc-work"
+    work.mkdir(parents=True, exist_ok=True)
+    run(sys.executable, "-m", "mlc_llm", "package", "--package-config", package_file,
+        "--mlc-llm-source-dir", source, "--output", output, cwd=work, env=env)
+    mlc4j = output / "lib/mlc4j"
+    artifacts = mlc4j / "output"
+    for file in (artifacts / "tvm4j_core.jar", artifacts / "arm64-v8a/libtvm4j_runtime_packed.so"):
+        if not file.is_file():
+            raise SystemExit(f"Build did not produce {file}")
+    shutil.copytree(artifacts, ROOT / "android/mlc-runtime/output", dirs_exist_ok=True)
+    app_config = json.loads((mlc4j / "src/main/assets/mlc-app-config.json").read_text())
+    native_config = {"model_lib": app_config["model_list"][0]["model_lib"],
+        "model_revision": manifest["revision"], "mlc_commit": MLC_COMMIT,
+        "context_window_size": 2048, "prefill_chunk_size": 128}
+    (ROOT / "android/app/src/main/assets/mlc-native-config.json").write_text(
+        json.dumps(native_config, indent=2), encoding="utf-8")
+    print("Native artifacts imported. Rebuild the APK and benchmark on the physical POCO.")
+
+
+if __name__ == "__main__":
+    main()

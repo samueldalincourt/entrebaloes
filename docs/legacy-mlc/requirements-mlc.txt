@@ -1,0 +1,7 @@
+--find-links https://mlc.ai/wheels
+--pre
+mlc-llm-nightly-cpu==0.26.dev20
+mlc-ai-nightly-cpu==0.26.dev529
+cmake==4.4.4
+ninja==1.13.2
+psutil>=7,<8

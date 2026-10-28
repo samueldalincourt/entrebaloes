@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Entre Balões</string>
+    <string name="accessibility_description">Detecta rolagem e o aplicativo visível para posicionar as traduções. A sessão começa pausada: o botão flutuante Traduzir libera o processamento da tela, sem restrição de site; Pausar interrompe. Textos da árvore de acessibilidade não são lidos nem armazenados. A imagem é processada localmente pelo OCR. No modo online, os textos reconhecidos, o contexto visível e os termos do glossário são enviados ao Gemini.</string>
+</resources>
